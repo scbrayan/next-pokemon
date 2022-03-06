@@ -1,11 +1,25 @@
-import { Grid } from "@nextui-org/react";
-import { NextPage, GetStaticProps } from "next";
+import { Card, Grid } from "@nextui-org/react";
+import { NextPage } from "next";
+import { useEffect, useState } from "react";
 import { Layout } from "../../components/layouts";
+import { Favorites, Navbar } from "../../components/ui";
+import { NoFavorites } from "../../components/ui";
+import { localFavorites } from "../../utils";
 
 const FavoritesPage: NextPage = () => {
+  const [favorites, setFavortites] = useState<number[]>([]);
+
+  useEffect(() => {
+    setFavortites(localFavorites.getFavorites());
+  }, []);
   return (
     <Layout title="Favorites">
-      <Grid.Container gap={2} justify="flex-start"></Grid.Container>
+      <Navbar></Navbar>
+      {favorites.length == 0 ? (
+        <NoFavorites />
+      ) : (
+        <Favorites pokemons={favorites} />
+      )}
     </Layout>
   );
 };

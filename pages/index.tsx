@@ -10,6 +10,7 @@ interface Props {
   pokemons: Pokemon[];
 }
 const Home: NextPage<Props> = ({ pokemons }) => {
+  const onToggleFavorites = () => {};
   return (
     <Layout title="Lista Pokemon">
       <Navbar></Navbar>
